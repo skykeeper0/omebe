@@ -16,7 +16,8 @@ const userController = {
                     cookie: cookieVal,
                 }).then( (user) => {
                     res.cookie('session', user.cookie, {'maxAge': 3000000 }) // httpOnly later
-                    res.end();
+                    res.send('success');
+                    // res.end();
                 }).catch( (err) => {
                     console.log('This is an err: ' + err)
                     res.status(500).end();
@@ -52,8 +53,8 @@ const userController = {
                     }).then( () => {
                         res.cookie('session', user.cookie, {'maxAge': 3000000})
                         console.log('sucessfully updated, new cookie is ' + user.cookie)
+                        res.send('success');
 
-                        res.end();
                     }).catch( (err) => {
                         console.log(user.cookie)
                         console.log('uncessfullly updated: ' + err)
