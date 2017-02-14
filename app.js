@@ -11,15 +11,6 @@ server.listen(port);
 app.use(express.static(__dirname + '/public'));
 console.log('Server running!');
 
-var peerConn = new RTCPeerConnection();
-
-//establishing peer connection
-//...
-//end of establishing peer connection
-var dataChannel = peerConnection.createDataChannel("myChannel", dataChannelOptions);
-
-
-
 ///////////////////////////////////////////
 
 // array of all lines drawn
