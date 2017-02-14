@@ -7,10 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function submitLogin(e) {
+
     e.preventDefault();
     let username = $('#username').value;
     let password = $('#password').value;
     console.log('u',username,'p',password);
+
     $.ajax({
       type: 'POST',
       url: '/login',
