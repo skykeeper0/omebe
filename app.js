@@ -1,14 +1,15 @@
-const express = require('express')
-const app = express()
-const http = require('http')
-const socketio = require('socket.io')
+const express = require('express');
+const app = express();
+const http = require('http');
+const socketio = require('socket.io');
 
 let server = http.createServer(app);
 let io = socketio.listen(server);
-server.listen(8080);
+const port = process.env.PORT || 8080;
+server.listen(port);
 
 app.use(express.static(__dirname + '/public'));
-console.log("Server running on http://localhost:8080");
+console.log('Server running!');
 
 ///////////////////////////////////////////
 
