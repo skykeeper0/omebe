@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function submitLogin(e) {
+    console.log('above submit')
     e.preventDefault()
+    console.log('above submit')
     $.ajax({
       type: "POST",
       url: '/login',
