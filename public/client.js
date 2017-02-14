@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault()
     $.ajax({
       type: "POST",
+      url: '/login',
       data: JSON.stringify({username:username, password:password}),
       contentType: "application/json; charset=utf-8",
       success: (data) => {
