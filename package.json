@@ -2,18 +2,25 @@
   "name": "canvas",
   "version": "1.0.0",
   "description": "http://code-and.coffee/post/2015/collaborative-drawing-canvas-node-websocket/",
-  "main": "app.js",
+  "main": "./server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon server/server.js"
   },
   "author": "bdj",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.1",
     "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
+    "path": "^0.12.7",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
     "scss": "^0.2.4",
+    "sequelize": "^3.30.2",
     "socket.io": "^1.7.2"
   }
 }
