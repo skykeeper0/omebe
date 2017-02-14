@@ -48,11 +48,15 @@ h1 {
 }
 
 .video-box {
-  width: 100%;
+  width: 398px;
   margin: 10px auto;
   height: 300px;
   background-color: black;
   border: 1px solid white;
+}
+
+.video {
+  width: 396px;
 }
 
 .jscolor {

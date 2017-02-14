@@ -11,23 +11,32 @@ server.listen(port);
 app.use(express.static(__dirname + '/public'));
 console.log('Server running!');
 
+var peerConn = new RTCPeerConnection();
+
+//establishing peer connection
+//...
+//end of establishing peer connection
+var dataChannel = peerConnection.createDataChannel("myChannel", dataChannelOptions);
+
+
+
 ///////////////////////////////////////////
 
 // array of all lines drawn
-var line_history = [];
+const lineHistory = [];
 
 // event-handler for new incoming connections
 io.on('connection', function (socket) {
 
   // send drawing history to the new client
-  for (var i in line_history) {
-    socket.emit('draw_line', { line: line_history[i] });
+  for (let i in lineHistory) {
+    socket.emit('draw_line', { line: lineHistory[i] });
   }
 
   // add handler for message type "draw_line".
   socket.on('draw_line', function (data) {
     // add received line to history
-    line_history.push(data.line);
+    lineHistory.push(data.line);
 
     // send line to all clients
     io.emit('draw_line', { line: data.line });
