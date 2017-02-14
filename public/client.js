@@ -7,18 +7,22 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function submitLogin(e) {
-    console.log('above submit')
-    e.preventDefault()
-    console.log('above submit')
+
+    e.preventDefault();
+    let username = $('#username').value;
+    let password = $('#password').value;
+    console.log('u',username,'p',password);
+
     $.ajax({
-      type: "POST",
+      type: 'POST',
       url: '/login',
-      data: JSON.stringify({username:username, password:password}),
-      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({ username: username, password: password }),
+      contentType: 'application/json; charset=utf-8',
       success: (data) => {
-        console.log('success', data)
-      }
-    })
+        console.log('success', data);
+      },
+
+    });
   }
 
   // get canvas element and create context
