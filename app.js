@@ -9,6 +9,7 @@ const port = process.env.PORT || 8080;
 server.listen(port);
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/temp'));
 console.log('Server running!');
 
 ///////////////////////////////////////////
