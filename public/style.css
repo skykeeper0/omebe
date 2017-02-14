@@ -2,15 +2,22 @@
   margin: 0;
   padding: 0;
 }
+
 body, html{
   width: 100%;
   height: 100%;
   background-color: hsla(210, 34%, 18%, 0.63);
 }
 
+.nav {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
 h1 {
   color: white;
 }
+
 #drawing {
   display: block;
   overflow: scroll;
@@ -19,7 +26,33 @@ h1 {
 
 #toolbox {
   padding: 10px;
-  width: 1000px;
+  width: 25%;
+  margin: 10px;
+/*  float: left;*/
+}
+
+#canvass-container {
+  width:100%;
+  margin: 0 auto;
+}
+
+#canvass-box {
+  float: left;
+}
+
+#video-container {
+  width: 25%;
+  margin: 10px;
+  float: left;
+  padding: 10px;
+}
+
+.video-box {
+  width: 100%;
+  margin: 10px auto;
+  height: 300px;
+  background-color: black;
+  border: 1px solid white;
 }
 
 .jscolor {
