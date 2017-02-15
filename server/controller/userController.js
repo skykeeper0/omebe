@@ -83,8 +83,8 @@ const userController = {
     //                 res.end();
     //             }
     //         })
-        // next();
-        res.end();
+        next();
+        /*res.end();*/
     }   
 }
 
