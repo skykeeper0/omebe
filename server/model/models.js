@@ -5,7 +5,7 @@ const saltRounds = 10;
 
 const  Board = sequelize.define('boards', {
     // change it back to board_id
-    _id: {
+    board_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -49,7 +49,7 @@ const User = sequelize.define('users', {
 
 const SharedBoard = sequelize.define('shared_boards', {
     // change it back to shared_id
-    _id: {
+    shared_board_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
