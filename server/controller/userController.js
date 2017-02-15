@@ -79,6 +79,7 @@ const userController = {
             .then( (user) => {
                 if (!user) {
                     console.log('we didnt find your cookie');
+                    next();
                 } else {
                     req.verifiedUser = user.username
                     console.log('found your cookie');
