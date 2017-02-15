@@ -24,6 +24,7 @@ const userController = {
         // res.end();
         console.log('the user cookie is ', user.cookie);
         req.encryptedCookie = user.cookie;
+        req.newUser = user.username;
         next();
       }).catch((err) => {
         //need to store error
