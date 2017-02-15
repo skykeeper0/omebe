@@ -13,6 +13,32 @@ body, html{
 .nav {
   margin-bottom: 10px;
   padding: 5px;
+  background-color: hsla(210, 34%, 18%, 0.33);
+}
+
+.navbar-header {
+  float: right;
+}
+
+#loginBar {
+  margin: 0 auto;
+  width: 600px;
+}
+
+.logo {
+  float: right;
+}
+
+#omebe-logo {
+  width: 100px;
+}
+
+#logOutBtn {
+  position:relative;
+  float: left;
+  left: 150px;
+  margin:8px 0 0 15px;
+  display: none;
 }
 
 h1 {
@@ -22,6 +48,8 @@ h1 {
 #drawing {
   display: block;
   overflow: scroll;
+/*  height: 800px;
+  width: 800px;*/
   background-color: hsl(34, 37%, 94%);
 }
 
@@ -29,7 +57,11 @@ h1 {
   padding: 10px;
   width: 25%;
   margin: 10px;
-/*  float: left;*/
+  float: left;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+  background-color: hsla(210, 34%, 18%, 0.33);
 }
 
 #canvass-container {
@@ -86,4 +118,40 @@ h1 {
   display: inline-block;
   font-size: 0;
   line-height: 0
+}
+
+
+.modal-content {
+  /*background-image: url(../img/parchmentlightbg.jpg);*/
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.modal-footer {
+  border: none;
+}
+
+.modal-header {
+  margin-top:10px;
+  border: none;
+}
+
+.modal-body {
+  padding-left:15px;
+}
+
+#featuresHeader h1 {
+  text-align: center;
+  margin-top:80px;
+}
+
+#registrationError {
+  padding: 6px;
+  color: #C70000;
+  font-size: 1em;
+}
+
+#registrationForm input {
+  margin: 3px;
 }
