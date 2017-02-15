@@ -8,7 +8,6 @@ body, html{
   height: 100%;
   background-image: url('blue-sky-bg.jpg');
   font-family: 'Permanent Marker', cursive;
-  /*background-color: hsla(210, 34%, 18%, 0.63);*/
 }
 
 .nav {
@@ -61,6 +60,7 @@ ul {
 #sidebar {
   float: left;
   width: 33%;
+  min-width: 465px;
 }
 
 #toolbox {
@@ -134,9 +134,8 @@ ul {
 
 .range-slider__value {
   display: inline-block;
-  position: relative;
   top: -20px;
-  left: 350px;
+  float: left;
   width: 60px;
   color: #fff;
   line-height: 20px;
@@ -144,7 +143,7 @@ ul {
   border-radius: 3px;
   background: rgba(179, 0, 124, 0.74);
   padding: 5px 10px;
-  margin-left: 8px;
+  margin-left: 85px;
 }
 
 .range-slider__value:after {
@@ -189,11 +188,17 @@ input::-moz-focus-outer {
 }
 
 #advert-text {
-  font-size: 22px;
   position: relative;
-  z-index: 3;
-  top: 150px;
-  left: 48px;
+  background-image: url(./ok1.png);
+  background-repeat: no-repeat;
+  width: 95%;
+  border-radius: 5px;
+  margin: 10px;
+  height: 350px;
+  vertical-align: center;
+  text-align: center;
+  line-height: 5;
+  font-size: 25px;
 }
 
 #ok-img {
@@ -204,7 +209,7 @@ input::-moz-focus-outer {
 }
 
 #ok-img img {
-  width: 425px;
+  width: 95%;
   border-radius: 5px;
   margin: 20px;
 }
