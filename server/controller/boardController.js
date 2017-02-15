@@ -6,7 +6,7 @@ const boardController = {
     // create boards table: assign board_id, owner_id, board_img
     // one user can create multiple white board therefore onwer_id is connect with user_id of user and
     // one multiple board with different board_id can have ssame owner_id
-    createBoard(req, res) {
+    createBoard(req, res, next) {
         console.log('IN createBoard');
         // body contain owner_id and board_img FOR POSTMAN TESTING PURPOSE, may need to change
         const owner_id = req.body.owner_id;
@@ -24,7 +24,8 @@ const boardController = {
                 res.status(500).end();
             })
 
-        } 
+    },
+    
 
 }
 

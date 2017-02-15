@@ -35,7 +35,7 @@ $(".js-ajax").submit(function() {
 
   console.log('data', data, 'route', route[1]);
 
-  $.ajax({
+  /*$.ajax({
     type: "POST",
     dataType: "json",
     url: url,
@@ -62,7 +62,22 @@ $(".js-ajax").submit(function() {
         default:
           console.log("Did not parse rType: [" + rData['rType'] + "]");
       }
-    },
+    },*/
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: url,
+      data: data,
+      success: function(data) {
+        if (data.success) {
+          window.location.href = '/'
+        }
+        else {
+          alert(data.status);
+          window.location.href = '/'
+        }
+
+      },
     error: function(jqXHR,exception) {
      /*console.log(jqXHR);*/
      alert(jqXHR.status + " exc:[" + exception + "] text[" +  jqXHR.responseText + "]");
@@ -93,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('drawing');
   const lineSlider = document.getElementById('lineSize');
   const colorPick = document.getElementById('color-picker');
-
   const context = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
