@@ -6,21 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     pos_prev: false
   };
 
-  function submitLogin(e) {
-    console.log('above submit')
-    e.preventDefault()
-    console.log('above submit')
-    $.ajax({
-      type: "POST",
-      url: '/login',
-      data: JSON.stringify({username:username, password:password}),
-      contentType: "application/json; charset=utf-8",
-      success: (data) => {
-        console.log('success', data)
-      }
-    })
-  }
-
   // get canvas element and create context
   const canvas = document.getElementById('drawing');
   const lineSlider = document.getElementById('lineSize');

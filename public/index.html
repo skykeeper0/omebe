@@ -49,34 +49,10 @@
     <div id="canvass-box">
       <canvas id="drawing" height='750px' width='750px'></canvas>
     </div>
-    <div id="video-container">
-      <div class="video-box">
-        <video autoplay></video>
-        <script src = "rtcClient.js"></script>
-      </div>
-      <div class="video-box"></div>
-    </div>
+    
   </div>
 </div>
 </body>
 <script>
- function submitLogin(e) {
-    // console.log('above submit', e)
-    // e.preventDefault()
-    console.log('above submit')
-    const username = document.getElementById("username").value
-    const password = document.getElementById("password").value
-    console.log("username: " + username + "  " + "password: ", password)
-
-    $.ajax({
-      type: "POST",
-      url: '/login',
-      data: JSON.stringify({username:username, password:password}),
-      contentType: "application/json; charset=utf-8",
-      success: (data) => {
-        console.log('success', data)
-      }
-    })
-  }
 </script>
 </html>

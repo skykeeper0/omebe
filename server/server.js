@@ -11,13 +11,16 @@ let server = http.createServer(app);
 let io = socketio.listen(server);
 server.listen(8080);
 
+app.use(bodyParser.urlencoded({ extended: true}));;
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+//set up cookie check on initial. THIS BEFORE express static is important!
+app.get('/', userController.checkCookie)
 
 app.use(express.static(path.join(__dirname, '../public')));
 console.log("Server running on http://localhost:8080");
 
-app.use(bodyParser.urlencoded({ extended: true}));;
-app.use(bodyParser.json());
-app.use(cookieParser());
 
 ///////////////////////////////////////////
 
@@ -27,8 +30,6 @@ app.post('/signup', userController.createUser)
 //set up post request for log in
 app.post('/login', userController.verifyUser)
 
-//set up get request
-app.get('/', userController.checkCookie)
 
 // array of all lines drawn
 var line_history = [];
