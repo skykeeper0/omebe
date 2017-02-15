@@ -89,6 +89,8 @@ $('#submitRegistration').click(function () {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  
+
   let mouse = {
     click: false,
     move: false,
@@ -103,14 +105,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const context = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
-  const socket = io.connect();
-  //const socket = io('/new');
+
   const rect = canvas.getBoundingClientRect();
   console.log(rect);
 
-  function loadNameSpace(nameSpace) {
+  console.log('passing ' + namespace )
+    // let socket;
+  let socket = io('/' + namespace);
 
-  }
+  // if (namespace) {
+  //     socket = io('/' + namespace);
+  //     console.log('accessing namespace: ', namespace)
+  // } else {
+  //     socket = io.connect();
+  //     console.log('accessing public: ', namespace)
+  // }
+  
+
 
   // initialize pen color
   let lineColor = '#000000';

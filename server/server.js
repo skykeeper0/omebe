@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const userController = require('./controller/userController');
 
 let server = http.createServer(app);
-let io = socketio.listen(server);
+
 server.listen(8080);
 console.log("Server running on http://localhost:8080");
 
@@ -18,7 +18,29 @@ app.use(bodyParser.urlencoded({ extended: true}));;
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-///////////////////////////////////////////
+////////////////////////////////////////////////////
+
+
+//============= TESTING: CREATE MULTIPLE NAMESPACE IN SERVER ==============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//================ DO NOT MODIFY BELOW +++++++++++++++++++++++++++++++++++++
 
 //set up post request to sign up
 app.post('/signup', userController.createUser, (req, res) => {
@@ -53,6 +75,8 @@ app.get('/', userController.checkCookie, (req, res) => {
   }
 
   });
+
+let io = socketio.listen(server);
 
 // array of all lines drawn
 var lineHistory = [];
