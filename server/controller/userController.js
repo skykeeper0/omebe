@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs')
 const userController = {
 
     createUser(req, res, next) {
+        console.log('IN createUser');
         if (req.body.username.length > 0 && req.body.password.length > 0) {
             const username = req.body.username;
             const password = req.body.password;
@@ -39,6 +40,7 @@ const userController = {
     },
 
     verifyUser(req, res, next) {
+        console.log('IN verifyUser');
         User
             .findOne({
                 where: {username: req.body.username}
@@ -71,6 +73,7 @@ const userController = {
     },
 
     checkCookie(req, res, next) {
+    console.log('IN checkCookie');
     if(req.cookies.session) {
         User
             .findOne({
@@ -79,6 +82,7 @@ const userController = {
             .then( (user) => {
                 if (!user) {
                     console.log('we didnt find your cookie');
+                    next();
                 } else {
                     req.verifiedUser = user.username
                     console.log('found your cookie');
@@ -86,6 +90,7 @@ const userController = {
                 }
             }).catch((err) => {
                 console.log(err);
+                res.status(500).send(err);
             })
     }
     } 

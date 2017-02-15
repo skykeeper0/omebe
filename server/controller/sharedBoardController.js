@@ -4,6 +4,7 @@ const SharedBoard = obj.SharedBoard;
 const sharedBoardController = {
 
     createSharedBoard(req, res) {
+      console.log('IN createSharedBoard');
         // body contain board_id and user_id FOR POSTMAN TESTING PURPOSE, may need to change
         const board_id = req.body.board_id;
         const user_id = req.body.user_id;
