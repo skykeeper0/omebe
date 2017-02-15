@@ -23,8 +23,10 @@ app.use(cookieParser());
 //set up post request to sign up
 app.post('/signup', userController.createUser, (req, res) => {
   //res.status(200).json({rType: 'registered', rData: {username: 'test'}});
-  res.render('../public/loggedIn.ejs', {username: req.body.username});
-  res.cookie('session', req.encryptedCookie, {'maxAge': 3000000 }) // 
+  console.log('new User:', req.newUser);
+  res.render('../public/loggedIn.ejs', { username: req.newUser });
+
+  //res.cookie('session', req.encryptedCookie, {'maxAge': 3000000 }) //
 
 });
 
@@ -32,7 +34,7 @@ app.post('/signup', userController.createUser, (req, res) => {
 app.post('/login', userController.verifyUser, (req, res) => {
   //res.status(200).json({rType: 'registered', rData: {username: 'test'}});
   res.render('../public/loggedIn.ejs', {username: req.verifiedUser});
-  res.cookie('session', req.encryptedCookie, {'maxAge': 3000000});
+  //res.cookie('session', req.encryptedCookie, {'maxAge': 3000000});
 
 
 });

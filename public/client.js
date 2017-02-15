@@ -25,47 +25,48 @@ $("#registerBtn").click( function() {
 
 });
 
-$(".js-ajax").submit(function() {
 
+$('#logoutbtn').click(function() {
+
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: '/logout',
+    success: function(response) {
+      if(reponse.success) {
+        window.location.href = '/';
+      }
+      else {
+        alert('logout failed');
+        window.location.href = '/';
+      }
+    }
+  })
+});
+
+$("#registrationForm").submit(function() {
   let data = $(this).serialize();
   console.log('serialized', data);
   let route = data.match(/route=(.*?)&/);
   let url = 'http://localhost:8080' + '/' + route[1];
   event.preventDefault();
-
   console.log('data', data, 'route', route[1]);
 
   $.ajax({
     type: "POST",
-    dataType: "json",
+    dataType: "text",
     url: url,
     data: data,
     success: function(rData) {
-      switch(rData['rType']) {
-        case 'ERROR':
-          alert(rData['errorText']);
-          break;
-        case 'registered':
-          $("#registerClose").trigger('click');
-          $("#username")[0].value = "";
-          $("#password")[0].value = "";
-          $("#passwordConfirm")[0].value = "";
-          break;
-        case 'login':
-          $("#userId")[0].value = rData['userId'];
-          $("#loginBar").hide();
-          $("#userText")[0].innerHTML = rData['userName'] + " logged in";
-          $("#logOutBtn").show();
-          $("#loginUsername")[0].value = "";
-          $("#loginPassword")[0].value = "";
-          break;
-        default:
-          console.log("Did not parse rType: [" + rData['rType'] + "]");
-      }
+      console.log('Success', rData);
+      const html = $.parseHTML(rData);
+      $('body').replaceWith(rData);
     },
     error: function(jqXHR,exception) {
-     /*console.log(jqXHR);*/
-     alert(jqXHR.status + " exc:[" + exception + "] text[" +  jqXHR.responseText + "]");
+      $("#registerClose").trigger('click');
+     console.log(jqXHR);
+     //alert(jqXHR.status + " exc:[" + exception + "] text[" +  jqXHR.responseText + "]");
+
      },
   });
   return false;
@@ -97,16 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const context = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
-  const socket = io.connect();
+  //const socket = io.connect();
+  const socket = io('/new');
   const rect = canvas.getBoundingClientRect();
   console.log(rect);
 
+  function loadNameSpace(nameSpace) {
 
-  let randomColor = ['#FF0000', '#888888', '#1200d6']
-  // let penColor = randomColor[Math.floor(Math.random() * 3)];
+  }
 
   // initialize pen color
-  let lineColor = '#000000'
+  let lineColor = '#000000';
 
   canvas.style.cursor = 'crosshair';
 

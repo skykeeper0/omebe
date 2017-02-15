@@ -33,40 +33,6 @@
     </div>
   </nav>
 
-  <!-- Registration Modal -->
-  <div id="welcome" class="container">
-    <div id="registerModal" class="modal fade">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">X</button>
-            <h4 class="modal-title">Create an Account</h4>
-          </div>
-          <form id="registrationForm" method="post" accept-charset="utf-8" class="js-ajax form-inline">
-            <input type="hidden" name="route" value="signup" />
-            <div class="modal-body">
-              <div class="form-group">
-                <input type="text" name="username" id="username" placeholder="username" maxlength="64" class="form-control px3margin" />
-              </div>
-              <div class="form-group">
-                <input type="password" name="password" id="password" placeholder="password" maxlength="64" class="form-control px3margin" />
-              </div>
-              <div class="form-group">
-                <input type="password" id="passwordConfirm" placeholder="confirm password" maxlength="64" class="form-control px3margin" />
-              </div>
-            </div>
-            <div id="registrationError"></div>
-            <div id="registrationModalBtn" class="modal-footer">
-              <input id="registerBtn" type="submit" value="Register" class="btn wButton" />
-              <input id="submitRegistration" type="button" class="btn wButton" data-dismiss="modal" value="Close" style="display:none" />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /Registration Modal -->
-
 </header>
 <div id='board-container'>
   <div id="canvass-container">
@@ -82,27 +48,16 @@
           <span class="range-slider__value">0</span>
         </div>
       </div>
-      <div id="advert">
-        <h3>Want to get more out of</h3>
-        <h1>Omebe?</h1>
-        <h2>Register today!</h2>
-        <div id="advert-text"></div>
+      <div id="userPanel">
+        <div id="saveBoard"><button id="saveBoardBtn" type="button" class="btn userBtn" data-toggle="modal" data-target="#saveBoardModal">Save Board</button></div>
+        <div id="loadBoard"><button id="loadBoardBtn" type="button" class="btn userBtn" data-toggle="modal" data-target="#loadBoardModal">Load Board</button></div>
+        <div id="shareBoard"><button id="shareBoardBtn" type="button" class="btn userBtn" data-toggle="modal" data-target="#shareBoardModal">Share Board</button></div>
+        <div id="invitations"><button id="invitationsBtn" type="button" class="btn userBtn" data-toggle="modal" data-target="#invitationsModal">Invitations</button></div>
       </div>
     </div>
     <div id="canvass-box">
       <canvas id="drawing" height="800px" width="800px"></canvas>
     </div>
-    <!--<div id="video-container">
-      <div class="video-box">
-        <video id="local-video" class="video" autoplay></video>
-        <script src="rtcClient.js"></script>
-      </div>
-      <div class="video-box">
-        <video id="remote-video" class="video" autoplay></video>
-        &lt;!&ndash;<script src = "rtcClient.js"></script>&ndash;&gt;
-      </div>
-    </div>
-  </div>-->
   </div>
 </div>
 </body>
