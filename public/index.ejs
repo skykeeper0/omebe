@@ -5,7 +5,6 @@
   <title>OMEBE</title>
   <meta charset="utf-8">
   <!-- Grab jQuery -->
-
   <script src="http://code.jquery.com/jquery-3.1.1.min.js"
           integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
           crossorigin="anonymous"></script>
@@ -16,8 +15,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
+  <!--google web font-->
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="stylesass.css" />
+  <!--<link rel="stylesheet" href="stylesass.css" />-->
   <script src="socket.io/socket.io.js"></script>
 </head>
 
@@ -28,10 +30,10 @@
       <form id="loginForm" method="post" accept-charset="utf-8" class="js-ajax navbar-form navbar-left">
         <input type="hidden" name="route" value="login" />
         <div class="form-group">
-          <input id="loginUsername" type="text" name="username" maxlength="64" placeholder="username (case sensitive)" class="form-control" />
+          <input id="loginUsername" type="text" name="username" maxlength="64" placeholder="username" class="form-control" />
         </div>
         <div class="form-group">
-          <input id="loginPassword" type="password" name="password" maxlength="64" placeholder="password (case sensitive)" class="form-control" />
+          <input id="loginPassword" type="password" name="password" maxlength="64" placeholder="password" class="form-control" />
         </div>
         <input id="logInBtn" type="submit" value="Login" class="btn"/>
         <button id="registerClose" type="button" class="btn wButton" data-toggle="modal" data-target="#registerModal">Register</button>
@@ -81,16 +83,32 @@
 </header>
 <div id='board-container'>
   <div id="canvass-container">
-    <div id='toolbox'>
-      <div>
-        <div class="btn-container">
-          <button id="color-picker"; class="jscolor {valueElement:null,value:'rgb(69, 139, 173)'}"></button>
+    <div id="sidebar">
+      <div id='toolbox'>
+        <div id='color-picker-container'>
+          <div class="btn-container">
+            <button id="color-picker"; class="jscolor {valueElement:null,value:'rgb(25, 0, 255)'}"></button>
+          </div>
         </div>
-
+        <div class="range-slider">
+          <input id="lineSize" class="range-slider__range" type="range" value="5" min="1" max="30">
+          <span class="range-slider__value">0</span>
+        </div>
       </div>
-      <div class="range-slider">
-        <input id="lineSize" class="range-slider__range" type="range" value="5" min="1" max="30">
-        <span class="range-slider__value">0</span>
+      <div id="advert">
+        <h3>Want to get more out of</h3>
+        <h1>Omebe?</h1>
+        <h2>Register today!</h2>
+        <div id="advert-text">
+          <ul>
+            <li>Get private whiteboards!</li>
+            <li>Save your boards!</li>
+            <li>Share your boards!</li>
+          </ul>
+        </div>
+        <div id="ok-img">
+          <img src="./ok.jpg"/>
+        </div>
       </div>
     </div>
     <div id="canvass-box">

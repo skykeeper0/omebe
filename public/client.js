@@ -41,7 +41,6 @@ $(".js-ajax").submit(function() {
     url: url,
     data: data,
     success: function(rData) {
-
       switch(rData['rType']) {
         case 'ERROR':
           alert(rData['errorText']);
