@@ -1,14 +1,11 @@
 *, *:before, *:after {
   box-sizing: border-box; }
 
-body {
-  }
-
 .range-slider {
-  margin: 0 0 0 0; }
-
-.range-slider {
-  width: 50%; }
+  margin: 0;
+  width: 60%;
+  float: left;
+}
 
 .range-slider__range {
   -webkit-appearance: none;
