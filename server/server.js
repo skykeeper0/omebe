@@ -10,11 +10,10 @@ const userController = require('./controller/userController');
 let server = http.createServer(app);
 let io = socketio.listen(server);
 server.listen(8080);
-
-app.use(express.static(path.join(__dirname, '../public')));
-
 console.log("Server running on http://localhost:8080");
 
+
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.urlencoded({ extended: true}));;
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -22,13 +21,24 @@ app.use(cookieParser());
 ///////////////////////////////////////////
 
 //set up post request to sign up
-app.post('/signup', userController.createUser);
+app.post('/signup', userController.createUser, (req, res) => {
+  res.cookie('session', req.encryptedCookie, {'maxAge': 3000000 }) // 
+  res.status(200).json({rType: 'registered', rData: {username: 'test'}});
+  //res.redirect('/');
+});
 
 //set up post request for log in
-app.post('/login', userController.verifyUser);
+app.post('/login', userController.verifyUser, (req, res) => {
+  res.cookie('session', req.encryptedCookie, {'maxAge': 3000000});
+  res.status(200).json({rType: 'registered', rData: {username: 'test'}});
+  res.redirect('/'); 
+});
+
 
 //set up get request
 app.get('/', userController.checkCookie, (req, res) => {
+  //req.verifiedUser will be the name of the user
+  //that will not exist if the check is not passed
     res.render('../public/index.ejs');
   });
 
