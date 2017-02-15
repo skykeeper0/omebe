@@ -22,16 +22,19 @@ app.use(cookieParser());
 
 //set up post request to sign up
 app.post('/signup', userController.createUser, (req, res) => {
+  //res.status(200).json({rType: 'registered', rData: {username: 'test'}});
+  res.render('../public/loggedIn.ejs', {username: req.body.username});
   res.cookie('session', req.encryptedCookie, {'maxAge': 3000000 }) // 
-  res.status(200).json({rType: 'registered', rData: {username: 'test'}});
-  //res.redirect('/');
+
 });
 
 //set up post request for log in
 app.post('/login', userController.verifyUser, (req, res) => {
+  //res.status(200).json({rType: 'registered', rData: {username: 'test'}});
+  res.render('../public/loggedIn.ejs', {username: req.verifiedUser});
   res.cookie('session', req.encryptedCookie, {'maxAge': 3000000});
-  res.status(200).json({rType: 'registered', rData: {username: 'test'}});
-  res.redirect('/'); 
+
+
 });
 
 
@@ -39,7 +42,13 @@ app.post('/login', userController.verifyUser, (req, res) => {
 app.get('/', userController.checkCookie, (req, res) => {
   //req.verifiedUser will be the name of the user
   //that will not exist if the check is not passed
+  if(req.verifiedUser) {
+    res.render('../public/loggedIn.ejs', {username: req.verifiedUser});
+  }
+  else {
     res.render('../public/index.ejs');
+  }
+
   });
 
 // array of all lines drawn
