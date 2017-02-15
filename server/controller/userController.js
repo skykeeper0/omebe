@@ -17,8 +17,11 @@ const userController = {
                     //res.cookie('session', user.cookie, {'maxAge': 3000000 }) // httpOnly later
                     //res.send('success');
                     // res.end();
+                    console.log('the user cookie is ', user.cookie);
                     req.encryptedCookie = user.cookie
+                    next()
                 }).catch( (err) => {
+                    //need to store error
                     console.log('This is an err: ' + err)
                     res.status(500).end();
                 })
@@ -27,7 +30,7 @@ const userController = {
             console.log('bad')
             res.status(500).end();
         }
-        next()
+        
     },
 
     verifyUser(req, res, next) {
@@ -49,10 +52,10 @@ const userController = {
                         cookie: req.body.username
                     }).then( () => {
                         req.encryptedCookie = user.cookie;
-                        // res.cookie('session', user.cookie, {'maxAge': 3000000})
+                        //res.cookie('session', user.cookie, {'maxAge': 3000000})
                         // console.log('sucessfully updated, new cookie is ' + user.cookie)
                         // res.send('success');
-
+                        next()
                     }).catch( (err) => {
                         console.log(user.cookie)
                         console.log('uncessfullly updated: ' + err)
@@ -60,7 +63,6 @@ const userController = {
                     })
                 }
             })
-        next()
     },
 
     checkCookie(req, res, next) {
@@ -71,16 +73,16 @@ const userController = {
             })
             .then( (user) => {
                 if (!user) {
-                    console.log('user data', user)
-                    
-                    console.log('user data name', user.username)
-                    req.verifiedUser = req.user.username
+                    console.log('we didnt find your cookie');
                 } else {
-                    console.log('you don\'t get shit');
+                    req.verifiedUser = user.username
+                    console.log('found your cookie');
+                    next();
                 }
+            }).catch((err) => {
+                console.log(err);
             })
     }
-        next();
     } 
 
 }
