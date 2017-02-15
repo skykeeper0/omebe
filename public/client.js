@@ -26,14 +26,14 @@ $("#registerBtn").click( function() {
 });
 
 
-$('#logoutbtn').click(function() {
-
+$('#logOutBtn').click(function() {
+  console.log('logging out');
   $.ajax({
     type: 'POST',
     dataType: 'json',
     url: '/logout',
     success: function(response) {
-      if(reponse.success) {
+      if(response.success) {
         window.location.href = '/';
       }
       else {
@@ -44,7 +44,7 @@ $('#logoutbtn').click(function() {
   })
 });
 
-$("#registrationForm").submit(function() {
+$(".js-ajax").submit(function() {
   let data = $(this).serialize();
   console.log('serialized', data);
   let route = data.match(/route=(.*?)&/);
@@ -54,14 +54,20 @@ $("#registrationForm").submit(function() {
 
   $.ajax({
     type: "POST",
-    dataType: "text",
+    dataType: "json",
     url: url,
     data: data,
-    success: function(rData) {
-      console.log('Success', rData);
-      const html = $.parseHTML(rData);
-      $('body').replaceWith(rData);
+    success: function(data) {
+      if (data.success) {
+        window.location.href = '/'
+      }
+      else {
+        alert(data.status);
+        window.location.href = '/'
+      }
+
     },
+
     error: function(jqXHR,exception) {
       $("#registerClose").trigger('click');
      console.log(jqXHR);
@@ -94,12 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('drawing');
   const lineSlider = document.getElementById('lineSize');
   const colorPick = document.getElementById('color-picker');
-
   const context = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
-  //const socket = io.connect();
-  const socket = io('/new');
+  const socket = io.connect();
+  //const socket = io('/new');
   const rect = canvas.getBoundingClientRect();
   console.log(rect);
 

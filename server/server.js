@@ -23,22 +23,23 @@ app.use(cookieParser());
 //set up post request to sign up
 app.post('/signup', userController.createUser, (req, res) => {
   //res.status(200).json({rType: 'registered', rData: {username: 'test'}});
-  console.log('new User:', req.newUser);
-  res.render('../public/loggedIn.ejs', { username: req.newUser });
-
-  //res.cookie('session', req.encryptedCookie, {'maxAge': 3000000 }) //
-
+  res.cookie('session', req.encryptedCookie, {'maxAge': 3000000 }) //
+  res.send({success: true});
+  //res.redirect('/')
+  //res.render('../public/loggedIn.ejs', {username: req.body.username});
 });
 
 //set up post request for log in
 app.post('/login', userController.verifyUser, (req, res) => {
   //res.status(200).json({rType: 'registered', rData: {username: 'test'}});
-  res.render('../public/loggedIn.ejs', {username: req.verifiedUser});
-  //res.cookie('session', req.encryptedCookie, {'maxAge': 3000000});
-
-
+  res.cookie('session', req.encryptedCookie, {'maxAge': 3000000});
+  res.send({success: true});
 });
 
+app.post('/logout', userController.logOut, (req, res) => {
+  res.cookie('session', 'deleted', {'maxAge': -1});
+  res.send({success: true});
+});
 
 //set up get request
 app.get('/', userController.checkCookie, (req, res) => {

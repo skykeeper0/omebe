@@ -29,7 +29,7 @@ const userController = {
       }).catch((err) => {
         //need to store error
         console.log('This is an err: ' + err);
-        res.status(500).end();
+        res.send({success: false, status: "User already exists"});
       })
     } else {
       console.log('bad');
@@ -46,10 +46,10 @@ const userController = {
       .then((user) => {
         if (!user) {
           console.log('cant find user');
-          res.end();
+          res.send({success: false, status: "Invalid Entry"});
         } else if (!bcrypt.compareSync(req.body.password, user.password)) {
           console.log('wrong password');
-          res.end();
+          res.send({success: false, status: "Wrong Password"});
         } else {
           const cookieVal = req.body.username;
           console.log( ' updating ' + 'user is ' + user.username + '   old cookie is ' + user.cookie);
@@ -62,9 +62,8 @@ const userController = {
             // res.send('success');
             next();
           }).catch((err) => {
-            console.log(user.cookie)
             console.log('unsucessfullly updated: ' + err);
-            res.end();
+            res.send({success: false, status: "No Such User"});
           });
         }
       });
@@ -95,6 +94,10 @@ const userController = {
       next();
     }
   },
+  logOut (req, res, next) {
+    console.log('in logout');
+    next()
+  }
 };
 
 module.exports = userController;
