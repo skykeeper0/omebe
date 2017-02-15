@@ -1,5 +1,10 @@
-const User = require('./../model/userModel')
+const obj = require('./../model/models')
+const User = obj.User;
+
+
+// const User = require('./../model/userModel')
 const bcrypt = require('bcryptjs')
+
 
 const userController = {
 
