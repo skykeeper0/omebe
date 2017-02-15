@@ -89,6 +89,7 @@ const userController = {
                 console.log(err);
             })
     }
+    next();
     } 
 
 }
