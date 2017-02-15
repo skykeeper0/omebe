@@ -81,6 +81,7 @@ const userController = {
             console.log('we didnt find your cookie');
             next();
           } else {
+            req.user_id = user.user_id;
             req.verifiedUser = user.username;
             console.log('found your cookie');
             next();

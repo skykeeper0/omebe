@@ -6,6 +6,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const userController = require('./controller/userController');
+const boardController = require('./controller/boardController');
+
 
 let server = http.createServer(app);
 let io = socketio.listen(server);
@@ -41,12 +43,27 @@ app.post('/logout', userController.logOut, (req, res) => {
   res.send({success: true});
 });
 
+app.post('/saveboard', boardController.createBoard, (req, res) => {
+  res.send({success: true})
+})
+
+app.post('/loadboards', boardController.loadBoards, (req, res) => {
+  if (req.noBoards) res.send({success: false})
+  else res.send({success: true, boards: req.boards});
+})
+
+app.post('/selectboard', boardController.selectBoard, (req,res) => {
+  if (req.noBoardFound) res.send({success: false})
+  else res.send({success: true, board_id: req.board_id, board_data: req.board_data})
+})
+
 //set up get request
 app.get('/', userController.checkCookie, (req, res) => {
   //req.verifiedUser will be the name of the user
   //that will not exist if the check is not passed
   if(req.verifiedUser) {
-    res.render('../public/loggedIn.ejs', {username: req.verifiedUser});
+    console.log(req.user_id);
+    res.render('../public/loggedIn.ejs', {username: req.verifiedUser, user_id: req.user_id});
   }
   else {
     res.render('../public/index.ejs');
