@@ -1,5 +1,10 @@
-const User = require('./../model/userModel')
+const obj = require('./../model/models')
+const User = obj.User;
+
+
+// const User = require('./../model/userModel')
 const bcrypt = require('bcryptjs')
+
 
 const userController = {
 
@@ -70,19 +75,7 @@ const userController = {
         console.log(req);
         console.log(req.cookies.session);
 
-    //     User
-    //         .findOne({
-    //             where: {cookie: req.cookies.session}
-    //         })
-    //         .then( (user) => {
-    //             if (!user) {
-    //                 console.log('cookie not exist:');
-    //                 res.end();
-    //             } else {
-    //                 console.log('cookie exist: ' + req.cookies);
-    //                 res.end();
-    //             }
-    //         })
+
         // next();
         res.end();
     }   
