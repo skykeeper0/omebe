@@ -25,7 +25,9 @@ const boardController = {
             })
 
     },
-    
+    allBoards (req, res, next) {
+
+    }
 
 }
 

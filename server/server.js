@@ -41,7 +41,7 @@ app.post('/login', userController.verifyUser, (req, res) => {
 
 });
 
-app.post('logout', userController.logOut, (req, res) => {
+app.post('/logout', userController.logOut, (req, res) => {
   res.cookie('session', 'deleted', {'maxAge': -1});
   res.send({success: true});
 })
