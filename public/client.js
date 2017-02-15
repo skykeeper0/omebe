@@ -44,6 +44,33 @@ $('#logOutBtn').click(function() {
   })
 });
 
+
+$('#saveBoardBtn').click(function() {
+  console.log('saving Board');
+  const data = {};
+  data.user_id = user_id;
+  var canvas = $('#drawing');
+  data.board_data = canvas.toDataURL('image/png');
+
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: '/saveboard',
+    data: data,
+    success: function(response) {
+      if(response.success) {
+        alert('Board saved');
+      }
+      else {
+        alert('Board Save failed');
+      }
+    },
+    error: function() {
+        alert('Board Save failed');
+    }
+  })
+});
+
 $(".js-ajax").submit(function() {
   let data = $(this).serialize();
   console.log('serialized', data);
@@ -88,6 +115,14 @@ $('#submitRegistration').click(function () {
   $('#registrationForm').submit();
 });
 
+let socket;
+
+  function swapSocket(userName) {
+    let nameSpace = '/' + userName;
+    console.log("swapping socket to ", nameSpace);
+    socket = io(nameSpace);
+  }
+
 document.addEventListener('DOMContentLoaded', () => {
   let mouse = {
     click: false,
@@ -103,14 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const context = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
-  const socket = io.connect();
+  socket = io.connect();
   //const socket = io('/new');
   const rect = canvas.getBoundingClientRect();
   console.log(rect);
 
-  function loadNameSpace(nameSpace) {
 
-  }
 
   // initialize pen color
   let lineColor = '#000000';
@@ -124,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
   canvas.onmousemove = (e) => {
     const x = window.scrollX;
     mouse.pos.x = e.clientX + x - rect.left;
-    
+
     const y = window.scrollY;
     mouse.pos.y = e.clientY + y - rect.top;
 
@@ -171,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var slider = $('.range-slider'),
         range = $('.range-slider__range'),
         value = $('.range-slider__value');
-      
+
     slider.each(function(){
 
       value.each(function(){
