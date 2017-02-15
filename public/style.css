@@ -41,6 +41,11 @@ body, html{
   display: none;
 }
 
+#userText {
+  margin: 10px auto;
+  font-size: 24px;
+}
+
 h1 {
   color: white;
 }
