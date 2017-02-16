@@ -4,7 +4,7 @@
   "description": "http://code-and.coffee/post/2015/collaborative-drawing-canvas-node-websocket/",
   "main": "./server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha",
     "start": "nodemon server/server.js"
   },
   "author": "bdj",
@@ -15,7 +15,9 @@
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.5",
     "express": "^4.14.1",
+    "http": "0.0.0",
     "jquery": "^3.1.1",
+    "mocha": "^3.2.0",
     "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
@@ -24,6 +26,7 @@
     "scss": "^0.2.4",
     "sequelize": "^3.30.2",
     "socket.io": "^1.7.2",
+    "supertest": "^3.0.0",
     "ws": "^2.0.3"
   }
 }
