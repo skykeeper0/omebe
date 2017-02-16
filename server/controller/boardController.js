@@ -9,23 +9,64 @@ const boardController = {
     createBoard(req, res, next) {
         console.log('IN createBoard');
         // body contain owner_id and board_img FOR POSTMAN TESTING PURPOSE, may need to change
-        const owner_id = req.body.owner_id;
-        const board_img = req.body.board_img;
+        const owner_id = req.body.user_id;
+        const board_img = req.body.boardData;
 
         Board
             .create({
-                owner_id: owner_id,
-                board_img: board_img,
-            }).then( (user) => {
-                res.send(' white board successfully created ');
+                owner_id,
+                board_img
+            }).then((user) => {
+                next();
                 // res.end();
-            }).catch( (err) => {
+            }).catch((err) => {
                 console.log('This is an err: ' + err)
                 res.status(500).end();
             })
-
+        
     },
-    
+    loadBoards (req, res, next) {
+        console.log('IN loadBoard');
+        const owner_id = req.body.user_id;
+
+        Board
+            .findAll({
+                where: {
+                    owner_id
+                }
+            }).then((boards) => {
+                if(!boards[0]){
+                    req.noBoards = true;
+                    next();
+                }
+                req.boards = boards.map((board) => {
+                  return board.board_id;
+                });
+                next();
+            }).catch((err) => {
+                req.noBoards = true;
+                next()
+            })
+    },
+    selectBoard (req, res, next) {
+        console.log('In selectBoard');
+        const board_id = req.body.board_id;
+
+        Board
+            .findOne({
+                where: {
+                    board_id
+                }
+            }).then((board) => {
+                req.board_id = board.board_id;
+                req.board_data = board.board_img;
+                next()
+            }).catch((err) => {
+                console.log(err);
+                req.noBoardFound = true;
+                next()
+            })
+    }
 
 }
 
