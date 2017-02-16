@@ -44,6 +44,97 @@ $('#logOutBtn').click(function() {
   })
 });
 
+
+$('#saveBoardBtn').click(function() {
+  console.log('saving Board');
+  const data = {};
+  data.user_id = user_id;
+  let canvas = $('#drawing');
+  data.boardData = canvas[0].toDataURL('image/png');
+
+  console.log('Saving board', data);
+
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: '/saveboard',
+    data: data,
+    success: function(response) {
+      if(response.success) {
+        alert('Board saved');
+      }
+      else {
+        alert('Board Save failed');
+      }
+    },
+    error: function() {
+        alert('Board Save failed');
+    }
+  })
+});
+
+$('#loadBoardBtn').click(function() {
+  const data = {};
+  data.user_id = user_id;
+
+  console.log('loading saved boards', data);
+
+  $.ajax({
+    type: 'POST',
+    dataType: 'html',
+    url: '/loadboards',
+    data: data,
+    success: function(response) {
+      if( $('.loadBoardDialog')[0] ) {
+        $('.loadBoardDialog')[0] = response;
+      } else  {
+        $('#loadBoardModal').append(response);
+      }
+    },
+    error: function() {
+      alert('Board load failed');
+    }
+  })
+});
+
+function fetchBoard (boardId) {
+  console.log('boardname clicked');
+  const data = {};
+  console.log('fetch', boardId);
+  data.board_id = boardId;
+
+  //console.log('loading saved boards', data);
+
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: '/selectboard',
+    data: data,
+    success: function(response) {
+      if (response.success) {
+        console.log('success - remove modal');
+        //$("#loadBoardClose").trigger('click');
+        $('#loadBoardModal').modal('toggle');
+        //$('#loadBoardModal').remove();
+      }
+      let canvas = $('#drawing');
+      let ctx = canvas[0].getContext('2d');
+      ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
+      let newBoard = new Image;
+      newBoard.onload = function() {
+        ctx.drawImage(newBoard, 0, 0);
+        //$('#drawing')[0].drawImage(img,0,0);
+      }
+      newBoard.src = response.board_data;
+      //$("#registerClose").trigger('click');
+    },
+    error: function() {
+      alert('Board load failed');
+      //$("#registerClose").trigger('click');
+    }
+  })
+};
+
 $(".js-ajax").submit(function() {
   let data = $(this).serialize();
   console.log('serialized', data);
@@ -88,6 +179,14 @@ $('#submitRegistration').click(function () {
   $('#registrationForm').submit();
 });
 
+let socket;
+
+  function swapSocket(userName) {
+    let nameSpace = '/' + userName;
+    console.log("swapping socket to ", nameSpace);
+    socket = io(nameSpace);
+  }
+
 document.addEventListener('DOMContentLoaded', () => {
   let mouse = {
     click: false,
@@ -103,14 +202,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const context = canvas.getContext('2d');
   const width = canvas.width;
   const height = canvas.height;
-  const socket = io.connect();
+  socket = io.connect();
   //const socket = io('/new');
   const rect = canvas.getBoundingClientRect();
   console.log(rect);
 
-  function loadNameSpace(nameSpace) {
 
-  }
 
   // initialize pen color
   let lineColor = '#000000';
@@ -124,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
   canvas.onmousemove = (e) => {
     const x = window.scrollX;
     mouse.pos.x = e.clientX + x - rect.left;
-    
+
     const y = window.scrollY;
     mouse.pos.y = e.clientY + y - rect.top;
 
@@ -171,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var slider = $('.range-slider'),
         range = $('.range-slider__range'),
         value = $('.range-slider__value');
-      
+
     slider.each(function(){
 
       value.each(function(){

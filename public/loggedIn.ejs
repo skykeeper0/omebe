@@ -21,12 +21,21 @@
   <link rel="stylesheet" href="style.css" />
   <!--<link rel="stylesheet" href="stylesass.css" />-->
   <script src="socket.io/socket.io.js"></script>
+  <script>
+    let namespace = <%- JSON.stringify(user_id) %>;
+    let username = <%- JSON.stringify(username) %>;
+    let user_id  = <%- JSON.stringify(user_id) %>;
+    let boards;
+  </script>
+  <!--<script></script>-->
 </head>
 
 <body>
 <header>
   <nav class="nav navbar">
-    <div id="userText">Welcome to Omebe, <%= username %>!</div>
+    <div id="userContainer">
+      <div id="userText">Welcome to Omebe, <%= username %>!</div>
+    </div>
     <button id="logOutBtn" type="button" class="btn wButton">Logout</button>
     <div class="navbar-header">
       <a href="#" class="logo"><img id="omebe-logo" src="./logo.png" /></a>
@@ -34,6 +43,14 @@
   </nav>
 
 </header>
+
+<!-- Load Board Modal -->
+<div id="welcome" class="container">
+  <div id="loadBoardModal" class="modal fade">
+  </div>
+</div>
+
+
 <div id='board-container'>
   <div id="canvass-container">
     <div id="sidebar">
@@ -61,5 +78,5 @@
   </div>
 </div>
 </body>
-<script src="client.js"></script>
+  <script src="client.js"></script>
 </html>
