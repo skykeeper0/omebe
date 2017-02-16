@@ -48,7 +48,7 @@ $(".js-ajax").submit(function() {
   let data = $(this).serialize();
   console.log('serialized', data);
   let route = data.match(/route=(.*?)&/);
-  let url = 'http://localhost:8080' + '/' + route[1];
+  let url = '/' + route[1];
   event.preventDefault();
   console.log('data', data, 'route', route[1]);
 
@@ -109,19 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const rect = canvas.getBoundingClientRect();
   console.log(rect);
 
-  console.log('passing ' + namespace )
-    // let socket;
+  // console.log('passing ' + namespace )
+  // if it in pulbic namespace string will be empty so socket = io('/')
   let socket = io('/' + namespace);
 
-  // if (namespace) {
-  //     socket = io('/' + namespace);
-  //     console.log('accessing namespace: ', namespace)
-  // } else {
-  //     socket = io.connect();
-  //     console.log('accessing public: ', namespace)
-  // }
-  
-
+  // let socket = io('/new') //=== FOR TESTING PURPOSE<DELETE THIS LINE
 
   // initialize pen color
   let lineColor = '#000000';
