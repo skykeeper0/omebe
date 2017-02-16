@@ -49,8 +49,10 @@ $('#saveBoardBtn').click(function() {
   console.log('saving Board');
   const data = {};
   data.user_id = user_id;
-  var canvas = $('#drawing');
-  data.board_data = canvas.toDataURL('image/png');
+  let canvas = $('#drawing');
+  data.boardData = canvas[0].toDataURL('image/png');
+
+  console.log('Saving board', data);
 
   $.ajax({
     type: 'POST',
@@ -70,6 +72,68 @@ $('#saveBoardBtn').click(function() {
     }
   })
 });
+
+$('#loadBoardBtn').click(function() {
+  const data = {};
+  data.user_id = user_id;
+
+  console.log('loading saved boards', data);
+
+  $.ajax({
+    type: 'POST',
+    dataType: 'html',
+    url: '/loadboards',
+    data: data,
+    success: function(response) {
+      if( $('.loadBoardDialog')[0] ) {
+        $('.loadBoardDialog')[0] = response;
+      } else  {
+        $('#loadBoardModal').append(response);
+      }
+    },
+    error: function() {
+      alert('Board load failed');
+    }
+  })
+});
+
+function fetchBoard (boardId) {
+  console.log('boardname clicked');
+  const data = {};
+  console.log('fetch', boardId);
+  data.board_id = boardId;
+
+  //console.log('loading saved boards', data);
+
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: '/selectboard',
+    data: data,
+    success: function(response) {
+      if (response.success) {
+        console.log('success - remove modal');
+        //$("#loadBoardClose").trigger('click');
+        $('#loadBoardModal').modal('toggle');
+        //$('#loadBoardModal').remove();
+      }
+      let canvas = $('#drawing');
+      let ctx = canvas[0].getContext('2d');
+      ctx.clearRect(0, 0, canvas[0].width, canvas[0].height);
+      let newBoard = new Image;
+      newBoard.onload = function() {
+        ctx.drawImage(newBoard, 0, 0);
+        //$('#drawing')[0].drawImage(img,0,0);
+      }
+      newBoard.src = response.board_data;
+      //$("#registerClose").trigger('click');
+    },
+    error: function() {
+      alert('Board load failed');
+      //$("#registerClose").trigger('click');
+    }
+  })
+};
 
 $(".js-ajax").submit(function() {
   let data = $(this).serialize();

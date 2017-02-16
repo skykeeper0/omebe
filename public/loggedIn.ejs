@@ -22,14 +22,15 @@
   <!--<link rel="stylesheet" href="stylesass.css" />-->
   <script src="socket.io/socket.io.js"></script>
   <script>
+    let namespace = <%- JSON.stringify(user_id) %>;
     let username = <%- JSON.stringify(username) %>;
     let user_id  = <%- JSON.stringify(user_id) %>;
+    let boards;
   </script>
-  <script src="client.js"></script>
   <!--<script></script>-->
 </head>
 
-<body onload="swapSocket('\'' + <%- username %> + '\'')">
+<body>
 <header>
   <nav class="nav navbar">
     <div id="userContainer">
@@ -43,39 +44,12 @@
 
 </header>
 
-<!-- Registration Modal -->
+<!-- Load Board Modal -->
 <div id="welcome" class="container">
-  <div id="registerModal" class="modal fade">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">X</button>
-          <h4 class="modal-title">Create an Account</h4>
-        </div>
-        <form id="registrationForm" method="post" accept-charset="utf-8" class="js-ajax form-inline">
-          <input type="hidden" name="route" value="signup" />
-          <div class="modal-body">
-            <div class="form-group">
-              <input type="text" name="username" id="username" placeholder="username" maxlength="64" class="form-control px3margin" />
-            </div>
-            <div class="form-group">
-              <input type="password" name="password" id="password" placeholder="password" maxlength="64" class="form-control px3margin" />
-            </div>
-            <div class="form-group">
-              <input type="password" id="passwordConfirm" placeholder="confirm password" maxlength="64" class="form-control px3margin" />
-            </div>
-          </div>
-          <div id="registrationError"></div>
-          <div id="registrationModalBtn" class="modal-footer">
-            <input id="registerBtn" type="submit" value="Register" class="btn wButton" />
-            <input id="submitRegistration" type="button" class="btn wButton" data-dismiss="modal" value="Close" style="display:none" />
-          </div>
-        </form>
-      </div>
-    </div>
+  <div id="loadBoardModal" class="modal fade">
   </div>
 </div>
-<!-- /Registration Modal -->
+
 
 <div id='board-container'>
   <div id="canvass-container">
@@ -104,4 +78,5 @@
   </div>
 </div>
 </body>
+  <script src="client.js"></script>
 </html>

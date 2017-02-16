@@ -173,6 +173,9 @@ input::-moz-focus-outer {
   border: 0;
 }
 
+.hiddenBtn {
+  display: none;
+}
 
 #advert, #userPanel {
   padding: 10px;

@@ -17,7 +17,7 @@ const boardController = {
                 owner_id,
                 board_img
             }).then((user) => {
-                next()
+                next();
                 // res.end();
             }).catch((err) => {
                 console.log('This is an err: ' + err)
@@ -37,9 +37,12 @@ const boardController = {
             }).then((boards) => {
                 if(!boards[0]){
                     req.noBoards = true;
+                    next();
                 }
-                req.boards = boards
-                next()
+                req.boards = boards.map((board) => {
+                  return board.board_id;
+                });
+                next();
             }).catch((err) => {
                 req.noBoards = true;
                 next()
